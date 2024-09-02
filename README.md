@@ -60,3 +60,5 @@ This is a React-based application that allows users to create draggable lists wi
 
 5. **Dragging and Dropping Items:**
    - Click and hold an item to drag it to another position within the same list or into another list.
+![1](https://github.com/user-attachments/assets/44fc51be-2b1a-495c-a41c-76fe6a9f09c5)
+![2](https://github.com/user-attachments/assets/5e9f735b-4810-49bd-ba64-06be49f5c804)
