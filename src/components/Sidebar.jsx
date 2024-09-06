@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { ChevronRight, ChevronLeft, Plus, X } from "react-feather";
 import { Popover } from "react-tiny-popover";
 import { BoardContext } from "../context/BoardContext";
+import { AiOutlineCheck } from "react-icons/ai"; // Import the checkmark icon
+import "../App.css";
 
 const Sidebar = () => {
   const blankBoard = {
@@ -9,15 +11,18 @@ const Sidebar = () => {
     bgcolor: "#f60000",
     list: [],
   };
+
   const [boardData, setBoarddata] = useState(blankBoard);
   const [collapsed, setCollapsed] = useState(false);
   const [showpop, setShowpop] = useState(false);
   const { allboard, setAllBoard } = useContext(BoardContext);
+
   const setActiveboard = (i) => {
     let newBoard = { ...allboard };
     newBoard.active = i;
     setAllBoard(newBoard);
   };
+
   const addBoard = () => {
     let newB = { ...allboard };
     newB.boards.push(boardData);
@@ -25,10 +30,33 @@ const Sidebar = () => {
     setBoarddata(blankBoard);
     setShowpop(!showpop);
   };
+
+  
+
+  const colorOptions = [
+    "#ff9a9e",
+    "#a18cd1",
+    "#fbc2eb",
+    "#FFF0F5",
+    "#49afeb",
+    "#FFE4C4", // Add more colors as needed
+    "#5F9EA0",
+    "#6495ED", // Add more colors as needed
+    "#696969", // Add more colors as needed
+   
+  ];
+
+  const handleCardClick = (color) => {
+    setBoarddata({
+      ...boardData,
+      bgcolor: color,
+    });
+  };
+
   return (
     <div
-      className={`bg-[#121417] h-[calc(100vh-3rem)] border-r border-r-[#9fadbc29] transition-all linear duration-500 flex-shrink-0 ${
-        collapsed ? "w-[42px]" : "w-[280px]"
+      className={`bg-[#1d1d1d] h-[calc(100vh-3rem)] border-r border-r-[#9fadbc29] transition-all linear duration-500 flex-shrink-0 ${
+        collapsed ? "w-[42px]" : "w-[200px]"
       }`}
     >
       {collapsed && (
@@ -43,7 +71,7 @@ const Sidebar = () => {
       )}
       {!collapsed && (
         <div>
-          <div className="workspace p-3 flex justify-between border-b border-b-[#9fadbc29]">
+          <div className="workspace font-bold p-3 flex justify-between border-b border-b-[#4b6b8d29]">
             <h4> Workspace</h4>
             <button
               onClick={() => setCollapsed(!collapsed)}
@@ -59,20 +87,17 @@ const Sidebar = () => {
               <Popover
                 isOpen={showpop}
                 align="start"
-                positions={["right", "top", "bottom", "left"]} // preferred positions by priority
+                positions={["right", "top", "bottom", "left"]}
                 content={
-                  <div className="ml-2 p-2 w-60 flex flex-col justify-center items-center bg-slate-600 text-white rounded">
+                  <div className="ml-3 p-1 w-56 flex flex-col justify-center items-center bg-gray-800 text-white rounded">
                     <button
                       onClick={() => setShowpop(!showpop)}
                       className="absolute right-2 top-2 hover:bg-gray-500 p-1 rounded"
                     >
                       <X size={16}></X>
                     </button>
-                    <h4 className="py-3">Create Board</h4>
-                    <img
-                      src=".\public\freelance-people-work-compositio.jpg"
-                      alt=""
-                    />
+                    <h4 className="py-3 font-semibold">Create Board</h4>
+                    <img src=".\doing.gif" className="" alt="doing" />
                     <div className="mt-3 flex flex-col items-start w-full">
                       <label htmlFor="title">
                         Board Title <span>*</span>
@@ -83,20 +108,52 @@ const Sidebar = () => {
                           setBoarddata({ ...boardData, name: e.target.value })
                         }
                         type="text"
+                        placeholder="Enter Board Title"
                         className="mb-2 h-8 px-2 w-full bg-gray-700"
                       />
-                      <label htmlFor="Color">Board Color</label>
-                      <input
-                        value={boardData.bgcolor}
-                        onChange={(e) =>
-                          setBoarddata({
-                            ...boardData,
-                            bgcolor: e.target.value,
-                          })
-                        }
-                        type="color"
-                        className="mb-2 h-8 px-2 w-full bg-gray-700"
-                      />
+                      <label htmlFor="Color">Choose Background Colors</label>
+                      <div className="background-selection ">
+                        <div className="colors-section">
+                          <div className="color-grid">
+                            {colorOptions.map((color, index) => (
+                              <div
+                                key={index}
+                                className={`color-item relative ${
+                                  boardData.bgcolor === color ? "selected" : ""
+                                }`}
+                                style={{
+                                  background: color,
+                                  border:
+                                    boardData.bgcolor === color
+                                      ? "2px solid #000"
+                                      : "none",
+                                  width: "60px",
+                                  height: "40px",
+                                  borderRadius: "5px",
+                                  position: "relative",
+                                  margin: "3px",
+                                }}
+                                onClick={() => handleCardClick(color)}
+                              >
+                                {/* Show the checkmark icon if this card is selected */}
+                                {boardData.bgcolor === color && (
+                                  <AiOutlineCheck
+                                    size={24}
+                                    style={{
+                                      color: "black",
+                                      position: "absolute",
+                                      top: "50%",
+                                      left: "50%",
+                                      transform: "translate(-50%, -50%)",
+                                    }}
+                                  />
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
                       <button
                         onClick={() => addBoard()}
                         className="w-full rounded h-8 bg-slate-700 mt-2 hover:bg-gray-500"
@@ -131,14 +188,17 @@ const Sidebar = () => {
                       >
                         &nbsp;
                       </span>
-                      <span>{x.name}</span>
+                      {/* name  */}
+                      <div>
+                        <span>{x.name}</span>
+                      </div>
                     </button>
                   </li>
                 );
               })}
           </ul>
         </div>
-      )} 
+      )}
     </div>
   );
 };

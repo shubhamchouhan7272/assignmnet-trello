@@ -89,9 +89,11 @@ const Main = () => {
       style={{ backgroundColor: `${bdata.bgcolor}` }}
     >
       <div className="p-3 bg-black flex justify-between w-full bg-opacity-50">
-        <h2 className="text-lg">{bdata.name}</h2>
+        <div className="italic text-2xl font-bold font-sans">
+          <h2 className="text-lg">{bdata.name}</h2>
+        </div>
         <div className="flex items-center justify-center">
-          <button className="bg-gray-200 h-8 text-gray-800 px-2 py-1 mr-2 rounded flex justify-center items-center">
+          <button className="bg-white h-8 text-gray-800 px-2 py-1 mr-2 rounded flex justify-center items-center">
             <UserPlus size={16} className="mr-2"></UserPlus>
             Share
           </button>
@@ -101,7 +103,7 @@ const Main = () => {
         </div>
       </div>
       <div className="flex flex-col w-full flex-grow relative">
-        <div className="absolute mb-1 pb-2 left-0 right-0 top-0 bottom-0 p-3 flex overflow-x-scroll overflow-y-hidden">
+        <div className="absolute mb-0 pb-2 left-0 right-0 top-0 bottom-0 p-3 flex overflow-x-scroll overflow-y-hidden">
           <DragDropContext onDragEnd={onDragEnd}>
             {bdata.list &&
               bdata.list.map((x, ind) => {
@@ -111,7 +113,7 @@ const Main = () => {
                     className="mr-3 w-60 h-fit rounded-md p-2 bg-black flex-shrink-0"
                   >
                     <div className="list-body">
-                      <div className="flex justify-between p-1">
+                      <div className="flex justify-between p-1 font-semibold bg-gray-600 rounded-md">
                         <span>{x.title}</span>
                         <button className="hover:bg-gray-500 p-1 rounded-sm">
                           <MoreHorizontal size={16}></MoreHorizontal>
@@ -172,7 +174,7 @@ const Main = () => {
                                                   onClick={() =>
                                                     editCard(item, ind)
                                                   }
-                                                  className="hover:bg-gray-600 p-1 rounded-sm"
+                                                  className="hover:bg-green-600 p-1 rounded-sm"
                                                 >
                                                   <Edit2 size={16} />
                                                 </button>

@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Main from "./components/Main";
 import { BoardContext } from "./context/BoardContext";
-
+// import Sidebartest from "./components/Sidebartest";
 
 function App() {
   const boardData = {
@@ -12,7 +12,7 @@ function App() {
     boards: [
       {
         name: "My Trello Board",
-        bgcolor: "#069",
+        bgcolor: "#DAA520",
         list: [
           {
             id: "1",
@@ -39,9 +39,10 @@ function App() {
     <>
       <Header></Header>
       <BoardContext.Provider value={{ allboard, setAllBoard }}>
+        <div></div>
         <div className="content flex">
-          <Sidebar></Sidebar>
-          <Main></Main>
+          <Sidebar />
+          <Main />
         </div>
       </BoardContext.Provider>
     </>

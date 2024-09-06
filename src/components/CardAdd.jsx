@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import { X, Plus } from "react-feather";
 
 const CardAdd = (props) => {
@@ -42,21 +43,22 @@ const CardAdd = (props) => {
               </button>
               <button
                 onClick={() => closeBtn()}
-                className="p-1 rounded hover:bg-gray-600"
+                className="p-1 rounded hover:bg-red-600"
               >
                 <X size={16}></X>
               </button>
-              
             </div>
           </div>
         )}
         {!show && (
           <button
             onClick={() => setShow(!show)}
-            className="flex p-1 w-full justify-start rounded items-center mt-1 hover:bg-gray-500 h-8"
+            className="flex p-1 w-full justify-start rounded items-center mt-1 hover:bg-sky-800 h-8"
           >
-            <Plus size={16}></Plus> Add a card
+            <Plus size={18} /> Add a card
+            
           </button>
+          
         )}
       </div>
     </div>

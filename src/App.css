@@ -1,6 +1,42 @@
-body{
-  background: #333;
+body {
+  background: #4d41006e;
   color: white;
-  font-size: 14px;
+  font-size: 18px;
 }
+
+.background-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.photos-section,
+.colors-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.photo-grid,
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.photo-item,
+.color-item {
+  width: 60px;
+  height: 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.2s ease;
+}
+
+.photo-item:hover,
+.color-item:hover {
+  transform: scale(1.1);
+}
+
 
